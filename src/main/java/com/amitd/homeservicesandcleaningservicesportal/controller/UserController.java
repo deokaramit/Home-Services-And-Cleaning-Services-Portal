@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.amitd.homeservicesandcleaningservicesportal.beans.User;
 import com.amitd.homeservicesandcleaningservicesportal.dto.UserDto;
+import com.amitd.homeservicesandcleaningservicesportal.mapper.UserMapper;
 import com.amitd.homeservicesandcleaningservicesportal.service.UserService;
 
 @RestController
@@ -36,20 +37,23 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @PostMapping("")
-    public ResponseEntity<?> addUser(@Valid @RequestBody UserDto u) {
+    public ResponseEntity<?> addUser(@Valid @RequestBody UserDto userDto) {
+        User user = userMapper.dtoToModel(userDto);
 
-        User u1 = UserDto.toEntity(u);
+        user.setCreated_at(Calendar.getInstance().getTime());
 
-        u1.setCreated_at(Calendar.getInstance().getTime());
+        user.getRoles().iterator().next().setCreated_at(Calendar.getInstance().getTime());
+        ;
 
-        User newUser = userService.save(u1);
-
-        UserDto newDto = UserDto.fromEntity(newUser);
+        userDto = UserDto.fromEntity(userService.save(user));
 
         HashMap<String, Object> result = new HashMap<String, Object>();
         result.put("status", "success");
-        result.put("data", newDto);
+        result.put("data", userDto);
         return ResponseEntity.ok(result);
     }
 

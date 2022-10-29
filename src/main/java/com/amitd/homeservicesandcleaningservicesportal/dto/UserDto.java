@@ -35,6 +35,8 @@ public class UserDto {
 
     private int aadharno;
 
+    private Date dob;
+
     private Date created_at;
 
     private Date updated_at;

@@ -44,6 +44,10 @@ public class Role {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updated_at;
 
+    public Role(String name) {
+        this.name = name;
+    }
+
     /**
      * @param name
      * @param created_at
