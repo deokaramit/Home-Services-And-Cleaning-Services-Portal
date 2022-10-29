@@ -11,15 +11,10 @@ import com.amitd.homeservicesandcleaningservicesportal.beans.Role;
 import com.amitd.homeservicesandcleaningservicesportal.beans.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
     @Autowired
     private UserDao userDao;
@@ -28,8 +23,8 @@ public class UserService implements UserDetailsService {
     private RoleDao roleDao;
 
     public User save(User u) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        u.setPassword(encoder.encode(u.getPassword()));
+        // BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        // u.setPassword(encoder.encode(u.getPassword()));
 
         User u1 = userDao.save(u);
 
@@ -70,18 +65,18 @@ public class UserService implements UserDetailsService {
         userDao.save(user);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.findByUsername(username);
-        Collection<SimpleGrantedAuthority> authrities = new ArrayList<>();
+    // @Override
+    // public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    //     User user = userDao.findByUsername(username);
+    //     Collection<SimpleGrantedAuthority> authrities = new ArrayList<>();
 
-        user.getRoles().forEach(role -> {
-            authrities.add(new SimpleGrantedAuthority(role.getName()));
-        });
+    //     user.getRoles().forEach(role -> {
+    //         authrities.add(new SimpleGrantedAuthority(role.getName()));
+    //     });
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                authrities);
-    }
+    //     return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+    //             authrities);
+    // }
 
     public User findUserName(String username) {
         return userDao.findByUsername(username);

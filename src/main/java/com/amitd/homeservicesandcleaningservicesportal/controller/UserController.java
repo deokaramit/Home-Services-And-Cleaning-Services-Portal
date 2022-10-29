@@ -9,10 +9,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import com.amitd.homeservicesandcleaningservicesportal.dto.UserDto;
-import com.amitd.homeservicesandcleaningservicesportal.beans.User;
-import com.amitd.homeservicesandcleaningservicesportal.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -28,6 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amitd.homeservicesandcleaningservicesportal.beans.User;
+import com.amitd.homeservicesandcleaningservicesportal.dto.UserDto;
+import com.amitd.homeservicesandcleaningservicesportal.service.UserService;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/users")
@@ -35,13 +35,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    /**
-     * @param userService
-     */
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("")
     public ResponseEntity<?> addUser(@Valid @RequestBody UserDto u) {

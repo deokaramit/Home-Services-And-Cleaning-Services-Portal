@@ -16,9 +16,9 @@ import com.amitd.homeservicesandcleaningservicesportal.service.CategoryService;
 import com.amitd.homeservicesandcleaningservicesportal.service.UserService;
 import com.amitd.homeservicesandcleaningservicesportal.service.WorkService;
 
-@RestController
-@CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/api/auth")
+// @RestController
+// @CrossOrigin(origins = "http://localhost:3000")
+// @RequestMapping("/api/auth")
 public class AuthController {
 
     @Autowired
@@ -36,25 +36,25 @@ public class AuthController {
     // @Autowired
     // private AuthenticationManager authenticationManager;
 
-    @GetMapping("/home")
-    public ResponseEntity<List<Category>> CategoryList() {
-        List<Category> list = categoryService.show();
-        if (list != null) {
-            return ResponseEntity.ok(list);
-        } else {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-    }
+    // @GetMapping("/home")
+    // public ResponseEntity<List<Category>> CategoryList() {
+    //     List<Category> list = categoryService.show();
+    //     if (list != null) {
+    //         return ResponseEntity.ok(list);
+    //     } else {
+    //         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    //     }
+    // }
 
-    @GetMapping("/works")
-    public ResponseEntity<List<Work>> worksList() {
-        List<Work> list = workService.show();
-        if (list != null) {
-            return ResponseEntity.ok(list);
-        } else {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-    }
+    // @GetMapping("/works")
+    // public ResponseEntity<List<Work>> worksList() {
+    //     List<Work> list = workService.show();
+    //     if (list != null) {
+    //         return ResponseEntity.ok(list);
+    //     } else {
+    //         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    //     }
+    // }
 
     // @PostMapping("/register")
     // public ResponseEntity<?> addUser(@RequestBody UserDto u) {
